@@ -1,9 +1,11 @@
-import React from 'react'
+import AddProduct from "../Components/AddProduct";
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
-  )
+    <main className="main">
+      <AddProduct />
+    </main>
+  );
 }
 
-export default Dashboard
+export default Dashboard;
