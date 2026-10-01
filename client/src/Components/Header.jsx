@@ -10,7 +10,6 @@ export default function Header(props) {
   function onchanging(event) {
     const value = event.target.value;
     setSearchText(value);
-    // props.onSearch(value);
   }
 
   function onSearchSubmit(e) {

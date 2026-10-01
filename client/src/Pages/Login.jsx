@@ -5,10 +5,12 @@ import Header from "../Components/Header";
 import "./Login.css";
 
 export default function Login() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,7 +29,12 @@ export default function Login() {
         return;
       }
       localStorage.setItem("token", token);
-      navigate(location.state?.from?.pathname || "/", { replace: true });
+      navigate(
+        location.state?.from?.pathname === "/login"
+          ? "/dashboard"
+          : location.state?.from?.pathname || "/dashboard",
+        { replace: true }
+      );
     } catch (err) {
       setError(err.response?.data?.message || err.message);
     } finally {
@@ -35,13 +42,8 @@ export default function Login() {
     }
   }
 
-  function handleClick(searchTxt) {
-    // navigate("/", { state: { from: location, searchTxt: searchTxt } });
-    console.log("Search clicked with text:", searchTxt);
-  }
   return (
     <>
-      <Header onClick={handleClick} />
       <div className="login-wrapper">
         <div className="login-card">
           <h2>Login</h2>

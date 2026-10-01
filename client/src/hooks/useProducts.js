@@ -12,13 +12,16 @@ export function useProducts(endpoint) {
         const res = await axios.get(`http://localhost:4000${endpoint}`)
         const list = res.data?.products;
         setState({ products: Array.isArray(list) ? list : [], loading: false, error: "" });
+
       } catch (err) {
+
         if (axios.isCancel(err)) return;
         setState({
           products: [],
           loading: false,
           error: err.response?.data?.message || err.message || "Failed to fetch products",
         });
+        
       };
     }
     fetchProduct()

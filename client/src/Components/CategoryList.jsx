@@ -4,16 +4,20 @@ import { useState } from "react";
 import "./CategoryList.css";
 
 export default function CategoryList(props) {
+
   const { products, loading, error } = useProducts("/products");
+
   const counts = products.reduce((acc, product) => {
+
     const category = product.category || "Uncategorized";
     acc[category] = (acc[category] || 0) + 1;
+
     return acc;
   }, {});
 
+
   const categories = Object.entries(counts)
-    .map(([category, count]) => ({ category, count }))
-    .sort((a, b) => b.count - a.count);
+    .map(([category, count]) => ({ category, count }));
 
   if (loading) return <div className="category-list loading">Loading categories...</div>;
   if (error) return <div className="category-list error">{error}</div>;
@@ -29,9 +33,7 @@ export default function CategoryList(props) {
             category={category}
             productCount={count}
             isSelected={props.selectedCategory === category}
-            onClick={(category)=> {
-              props.onCategoryClick(category);
-            }}
+            onClick={props.onCategoryClick}
           />
         ))}
       </div>
